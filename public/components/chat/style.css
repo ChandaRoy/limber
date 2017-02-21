@@ -1,0 +1,169 @@
+
+.md-dialog-container{
+z-index:3008;
+}
+.md-dialog .md-content{
+  background-color: #fff;
+}
+md-dialog.fullscreen-dialog {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background-color: #fff;
+
+}
+
+
+.chatStrip {
+  position:fixed;
+  margin-top: -8px;
+  top: 0px;
+  right:0px;
+  width: 120px;
+  background-color:#4d394b;
+  height:100%;
+  z-index:3004;
+  overflow: hidden;
+}
+.md-sidenav-right {
+  left: 91.2%;
+  top: 50px;
+  z-index:3000;
+  background: #1a1b1d;
+}
+#projectName{
+
+  font-size:1.7rem;
+  font-weight: 900;
+  color: #fff;
+
+
+}
+.overflow_ellipsis {
+  background:#1a1b1d;
+  display: block;
+color:white;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#teamMembers{
+  color: #ab9ba9;
+  opacity: 1;
+  font-size: 1.5rem;
+  font-weight: 400;
+  max-width: 100%;
+}
+#teamMembers:hover{
+  color: #fff;
+}
+#active{
+  color:green;
+}
+#inactive{
+color:orange;
+}
+
+
+
+md-sidenav,
+md-sidenav.md-locked-open,
+md-sidenav.md-closed.md-locked-open-add-active {
+  min-width: 200px !important;
+  width: 85vw !important;
+  max-width: 850px !important;
+padding:0px;
+overflow: hidden;
+}
+
+._md-open-menu-container._md-active {
+z-index:4009;
+}
+
+#footer {
+  bottom: 10px;
+  left: 15px;
+  right: 1rem;
+  z-index: 52;
+position: absolute;
+/*margin-bottom: 5px;*/
+}
+
+#msgBox{
+  background: #fff;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  border: 2px solid #E0E0E0;
+  border-radius: 9px;
+  margin: 0;
+  bottom: 0px;
+  height: 100%;
+  max-height: 10rem!important;
+  border-radius: 0 6px 6px 0;
+}
+
+
+#myList {
+  min-height: 20px!important;
+  height: 40px!important;
+color:white;
+}
+.message md-list-item, md-list-item .md-list-item-inner{
+height:auto!important;
+}
+
+ .selectedPrj{
+background-color: grey
+}
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px !important;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .myDialog {padding-top: 15px;}
+  .myDialog a {font-size: 18px;}
+}
+
+
+.inputdemoIcons {
+  /*
+.right-icon {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  left: auto;
+  margin-top: 0;
+}
+*/ }
+  .inputdemoIcons .inputIconDemo {
+    min-height: 48px; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+    color: green; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+    color: dodgerblue; }
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+    color: red; }
+
+
+
+.selectedPrj{
+font-weight: bolder;
+opacity: 1;
+}
+.chatInput input {
+border:none;
+outline:none;
+}
+.chatInput input:focus{
+outline:none;
+}
+.chatInput .form-control {
+border:0px;
+}

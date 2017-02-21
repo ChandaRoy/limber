@@ -1,0 +1,24 @@
+<div ng-controller="activityController">
+  <div class="activity-wrap ">
+    <div class="activity-items" ng-repeat="act in activities">
+      <div class="menu-bar-avatar">
+        <img ng-src={{act.userCreator.photo}} class="pic-avatar" ng-hide="act.userCreator.photo == undefined" />
+        <div ng-show="act.userCreator.photo == undefined">
+          <ng-letter-avatar data={{act.userCreator.fullName}} charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+        </div>
+      </div>
+      <span class="activity-item-content">
+        <span>  <span class="activity-username" data-username={{act.userCreator._id}}>{{act.userCreator.fullName}}</span> {{act.action}} <a ng-if="act.object" class={{act.objectClass}}> {{act.object.name}}</a> {{act.preposition}}
+      <a class={{act.targetClass}}> {{act.target.name}}</a></span>
+      <span class="activity-time">{{act.timeAgo}} </span>
+      </span>
+    </div>
+  </div>
+  <div class="activity-more" ng-hide='moreData' ng-if="!storyID">
+    <button class=" btn  btn-link" ng-click='moreActivity()'>Read More ...</button>
+  </div>
+  <div class='text-center btn-primary' ng-show='moreData'>
+    No more results to show.
+  </div>
+
+</div>

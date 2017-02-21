@@ -1,0 +1,105 @@
+<!-- Start Modal Window-->
+<!-- <button class="btn btn-success pull-right"  ng-click="openReleaseStatus()">
+CFD Graph
+</button> -->
+
+<div class="pageHeading" ng-click="openReleaseStatus()"  tooltip-placement="bottom"  uib-tooltip="Analytics">
+    <b class="fa fa-bar-chart"></b>
+</div>
+
+<div ng-if = "projects.length > 0">
+  <div ng-init="getSprints()">
+  <div id="{{projects[curProjectLoc].release[curReleaseLoc]._id}}" class="container">
+    <div class="headingOfPage">
+      <tag ng-click="loadProject()">{{projects[curProjectLoc].name}}</tag>
+    </div>
+    <div class="relDiv">
+
+      <h4 class="innerPage" >{{projects[curProjectLoc].release[curReleaseLoc].name}}</h3>
+        <small tooltip-placement="bottom"  uib-tooltip="{{projects[curProjectLoc].release[curReleaseLoc].description}}" >{{projects[curProjectLoc].release[curReleaseLoc].description| limitTo:longRelDescLimit }}<span ng-hide="projects[curProjectLoc].release[curReleaseLoc].description.length < longRelDescLimit || projects[curProjectLoc].release[curReleaseLoc].description.length==undefined">
+          ...
+        </span></small><br>
+        <div class="boxContainer" ng-repeat= "spr in sprints"><!-- TODO: Changed for Testing -->
+          <div class="box"  ng-class="{'hideSlide':!hovering,'showSlide':hovering} " ng-mouseenter="hovering=true" ng-mouseleave="hovering=false" id="{{spr._id}}" >
+            <div class="slideMenuBox">
+              <i class="fa fa-trash" uib-tooltip="Delete"  data-toggle="modal" data-target="#deleteSprint" ng-click="setArchiveFun(projects[curProjectLoc].release[curReleaseLoc]._id, spr._id,projects[curProjectLoc].release[curReleaseLoc].name,spr.name)"></i>
+              <i class="fa fa-pencil" uib-tooltip="Edit" ng-click = "showEdit=true; newSprintName= spr.name; newSprintDetails = spr.description; newSprintStartDate = spr.startDate;  newSprintEndDate = spr.endDate"></i>
+              <i class="fa fa-star" uib-tooltip="Favorite" ng-click="starFun(release.id)"></i>
+            </div>
+            <div class="boxHeading">
+              {{spr.name}}
+            </div>
+            <div class="desc">
+              {{spr.description | limitTo:longDescLimit }}<span ng-hide="spr.description.length < longDescLimit || release.description ==undefined">
+                ...
+              </span>&nbsp;
+            </div>
+            <div class="date" >
+              {{spr.startDate | date:'dd-MMM-yyyy'}} to {{spr.endDate | date:'dd-MMM-yyyy'}}
+            </div>
+            <div class="dummy" ui-sref="sprint({ prId : projects[curProjectLoc]._id, releaseID:projects[curProjectLoc].release[curReleaseLoc]._id, sprintID: spr._id})">
+            </div>
+            <div class="backgroundBlack" ng-class="{'showEdit':showEdit,'hideEdit':!showEdit}" ng-click = "showEdit=false">
+            </div>
+          <form class="editSprint" ng-class="{'showEdit':showEdit,'hideEdit':!showEdit}">
+            <div class="form-group frm">
+              <label class="col-sm-4" for="releaseName">Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputName" ng-model = "newSprintName">
+              </div>
+            </div>
+            <div class="form-group frm">
+              <label class="col-sm-4" for="releaseDesc">Description</label>
+              <div class="col-sm-8">
+                <textarea class="form-control" id="inputDesc" ng-model = "newSprintDetails"/>
+              </div>
+            </div>
+            <div class="form-group frm">
+              <label class="col-sm-4" for="releaseDate">Start Date</label>
+              <div class="col-sm-8">
+                <input type="date" class="form-control" id="inputDate" value = "{{spr.startDate | date:'yyyy-MM-dd'}}" ng-model = "newSprintStartDate" date-parser="dd.MM.yyyy">
+              </div>
+            </div>
+            <div class="form-group frm">
+              <label class="col-sm-4" for="releaseDate">End Date</label>
+              <div class="col-sm-8">
+                <input type="date" class="form-control" id="inputDate" value = "{{spr.endDate | date:'yyyy-MM-dd'}}" ng-model = "newSprintEndDate" date-parser="dd.MM.yyyy">
+              </div>
+            </div>
+            <button type="button" class="btn btn-success" ng-click="editSprint(newSprintName,newSprintDetails,newSprintStartDate,newSprintEndDate,spr._id,spr.name)? showEdit=false : showEdit=true"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+            <!-- <button type="button" ng-click = "showEdit=false">X</button> -->
+          </form>
+          </div>
+        </div>
+        <div class="box addMore" ng-click="openModal(projects[curProjectLoc].release[curReleaseLoc].name)">
+            Add Sprint...
+        </div>
+      </div>
+
+      </div>
+</div>
+
+
+<div ng-include="'components/activity/menu.view.html'"></div>
+</div>
+
+<!-- Delete Sprint Modal -->
+<div class="modal fade AlertBox" id="deleteSprint" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header WarningModal">
+        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+        <h4 class="modal-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Warning</h4>
+      </div>
+      <div class="modal-body">
+        Do you want to delete the Sprint?<br><br>
+        <b>Release Name: </b>{{sprName}}
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click = "archiveFun()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

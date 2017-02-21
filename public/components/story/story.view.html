@@ -1,0 +1,303 @@
+<div class="modal-header storyHeader story-{{storyContr.storyGrp}}" ng-init="fetchMemberDetails()" >
+  <button type="button" class="close" ng-click="cancel()"><i class="fa fa-times-circle"></i></button>
+</div>
+<div class="modal-body row story-content" style="background-color:#f0f7f6">
+  <div class="story-delete" uib-tooltip="Delete" data-dismiss="modal" ng-click="deleteStory()" >
+    <i class="fa fa-trash-o" ></i>
+  </div>
+  <div class="story-copy" data-dismiss="modal" uib-tooltip="Copy" ng-click="moveCopyStory('components/story/operations/copyStory.view.html')">
+    <i class="fa fa-files-o" ></i>
+  </div>
+  <div class="story-move" data-dismiss="modal" uib-tooltip="Move" ng-click="moveCopyStory('components/story/operations/moveStory.view.html')">
+    <i class="fa fa-share" ></i>
+  </div>
+  <div class="story-details clearfix">
+    <!-- <span class="pull-left story-left-head"><i class="fa fa-clipboard" aria-hidden="true"></i></span> -->
+    <div class="pull-left">
+      <h3 class="story-header">{{ storyData.heading | limitTo: 60 }}{{storyData.heading.length > 60 ? '...' : ''}}<small></br>Updated:{{storyData.updatetime}}</h3></small>
+    </div>
+
+  </div>
+  <div class="">
+
+    <div class="col-sm-7 ">
+
+      <div class="storydiv">
+        <div class="story-details clearfix">
+          <div class="row">
+            <span class="pull-left story-left-head attachmentIcon"><i class="fa fa-pencil-square-o fa-text" aria-hidden="true"></i></span>
+            <div class="pull-left story-members story-sub-description">
+
+              <div>
+                <span ng-include="getTemplate(model.contacts)">
+                </span>
+                <script type="text/ng-template" id="display">
+                  <div class="story-sub-header" ng-click="editDescription(model.description)">
+                    <div data-sd-model-to-html="model.description.name"></div>
+                    <span ng-hide="model.description.name.length>0">
+                      <h3 class="story-sub-header">Edit description</h3>
+                    </span>
+                  </div>
+                </script>
+                <script type="text/ng-template" id="edit">
+
+                   <span><textarea id="ed-txt-area" data-ng-model="model.selected.name" placeholder="Edit Using Markdown!!"></textarea> </span>
+
+
+
+
+                 <i class="fa fa-question-circle" aria-hidden="true" title="Basic Markdown Syntax" data-content="{{popover.content}}" data-placement="left" data-template-url="/components/story/markdownSyntax.html"  data-auto-close="1" bs-popover></i>
+
+
+                    <span class="pull-right edit-description">
+                    <a class="btn btn-default btn-xs desc-btn" ng-click="saveDescription()" ><i class="fa fa-check"></i></a>
+                    <a class="btn btn-default btn-xs desc-btn"ng-click="reset()" ><i class="fa fa-close"></i></a>
+                  </span>
+
+
+
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <hr class="story-seperator">
+
+        <div class="story-details clearfix">
+        <div class="pull-left story-left-head attachmentIcon"><i class="fa fa-bookmark" aria-hidden="true"></i></div>
+        <div class="pull-left story-members">
+
+        <h3 class="story-sub-header">Labels<span><i class="fa fa-plus story-addbutton" aria-hidden="true" ng-click="addLabel()"></i></span></h3>
+      </div>
+      <div class="pull-left story-members story-label-margin">
+      <span ng-repeat="listArray in storyData.labelList">
+      <span class="story-label-design story-label story-label-{{listArray.colorName}}">
+    </span>
+  </span>
+</div>
+</div> -->
+<hr class="story-seperator">
+
+<div class="story-details clearfix">
+  <span class="pull-left story-left-head"><i class="fa fa-users" aria-hidden="true"></i></span>
+  <div class="pull-left story-members">
+    <h3 class="story-sub-header">Members<i class="fa fa-plus story-addbutton"ng-click="addMember()" aria-hidden="true"></i></h3>
+    <div class="menu-bar-avatar" ng-repeat="member in storyData.memberList" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+      <img ng-src={{member.photo}} class="pic-avatar" ng-hide="member.photo == undefined" />
+      <div ng-show="member.photo == undefined">
+
+        <ng-letter-avatar data={{member.fullName}} charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+      </div>
+      <span class="remove-members fa fa-times" ng-hide="!hovering" ng-click="removeMember(member._id,member.fullName)"></span>
+    </div>
+
+  </div>
+</div>
+<hr class="story-seperator">
+<div class="story-details clearfix">
+  <div class="row">
+    <div class="pull-left story-left-head attachmentIcon"><i class="fa fa-paperclip" aria-hidden="true"></i></div>
+    <div class="pull-left story-members">
+      <h3 class="story-sub-header">Attachments<span ng-click="divhovering=!divhovering" ><i class="fa fa-plus story-addbutton" aria-hidden="true"></i></span></h3>
+    </div>
+    <div class="col-sm-8" ng-show="divhovering">
+      <form name="form">
+        <div class="pull-left story-members attachments-wrap">
+          <button class="btn btn-primary" ngf-select ng-model="file" ngf-max-size="10MB" name="file" ngf-pattern="'*/*'" ngf-accept="'*/*'"><i class="fa fa-folder-open-o" aria-hidden="true" ></i></button>
+          <button class="btn btn-success" ng-click="upload();divhovering=!divhovering"><i class="fa fa-upload"></i></button>
+          <label for="form-control">{{file.name}}</label>
+          <div style='align:center'>  ( Note: Maximium limit to upload is 10MB)</div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="pull-left story-members attachments-wrap">
+    <div  class="list-group-item" ng-repeat="imagesPath in storyContr.storyData.attachmentList" title="{{imagesPath.fileName}}">
+      <ul class="list-group" ng-mouseenter="deletehovering=true" ng-mouseleave="deletehovering=false">
+        <a download="{{imagesPath.fileName}}" class="attachmentdetails attachmentText" href="{{imagesPath.path}}" title="{{imagesPath.fileName}}">
+          <span class=" col-sm-1 {{imagesPath.attachmentType}}" title="{{imagesPath.fileName}}"></span>
+          <div >{{ imagesPath.fileName | limitTo: 50 }}{{imagesPath.fileName.length > 50 ? '...' : ''}}
+          </div>
+          <div >Added:{{imagesPath.timeStamp}}<a class="attachmentdelete" ng-click="removeAttachment(storyContr.storyData._id,imagesPath._id,imagesPath.path,imagesPath.fileName)">
+            <i class="fa fa-trash-o" ng-show="deletehovering"></i>
+
+          </div>
+        </a>
+        <!-- <a class="attachmentdelete" ng-click="removeAttachment(storyContr.storyData._id,imagesPath._id,imagesPath.path)">
+        <i class="fa fa-trash-o" ></i>
+      </a> -->
+    </ul>
+  </div>
+</div>
+</a>
+</div>
+<!-- <hr class="story-seperator">
+<div class="story-details clearfix">
+  <span class="pull-left story-left-head"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
+  <div class="pull-left story-members">
+    <h3 class="story-sub-header">Checklists  <i class="fa fa-plus story-addbutton" ng-click="addChecklist()" aria-hidden="true"></i></h3>
+    <div ng-repeat="todo in storyData.checklist"> -->
+      <!-- <span class="checklist-header" ng-mouseenter="groupHovering=true" ng-mouseleave="groupHovering=false">{{todo.checklistHeading}} <small><a ng-click="removeChecklistGroup(todo._id,todo.checklistHeading)">
+        <i class="fa fa-trash-o" ng-show="groupHovering"></i></a></small></span>
+        <b class="progress-per">{{todo.items.length>0 ?((todo.checkedCount/todo.items.length*100)):0}}%</b>
+        {{Math.floor((todo.checkedCount/todo.items.length*100))}}
+        <uib-progressbar animate="false" value="todo.items.length>0 ?(todo.checkedCount/todo.items.length*100):0" type="success"></uib-progressbar> -->
+
+
+
+
+<!-- <my-cards list="todo"></my-cards>
+
+
+          <li class="checklist-todos" ng-repeat="list in todo.items">
+            <input type="checkbox" ng-model="list.checked" ng-click="updateTodoItem(list,todo)" >
+
+            <span class="done-{{list.checked}}" ng-mouseenter="itemHovering=true" editable-text="list.text" ng-mouseleave="itemHovering=false">{{list.text}}
+
+              <a ng-click="removeTodoItem(list,todo,list.text)"  ng-show="itemHovering">
+
+                <i class="fa fa-minus-circle" ></i>
+              </a>
+            </span>
+
+          </li>
+          <form>
+            <input type="text" ng-model="todo.todoText" class="form-control add-todo" size="40"
+            placeholder="Add New Todo" ></input><br>
+<input type="Date" ng-model="todo.todoDueDate">Due Date</input>
+            <button type="submit" class="btn btn-default btn-xs check-item-btn" ng-click="addTodoItem(todo)" ><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </form>
+          <hr class="story-seperator checklist-seperator">
+        </div>
+      </div>
+    </div> -->
+    <hr class="story-seperator">
+    <div class="story-details clearfix" ng-init="">
+      <span class="pull-left story-left-head"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
+      <div class="pull-left story-members">
+        <h3 class="story-sub-header">Checklists  <i class="fa fa-plus story-addbutton" ng-click="addChecklist()" aria-hidden="true"></i></h3>
+        <div ng-repeat="todo in storyData.checklist">
+          <span class="checklist-header" ng-mouseenter="groupHovering=true" ng-mouseleave="groupHovering=false">{{todo.checklistHeading}} <small><a ng-click="removeChecklistGroup(todo,todo.checklistHeading)">
+            <i class="fa fa-trash-o" ng-show="groupHovering"></i></a></small></span>
+
+            <b class="progress-per">{{todo.items.length>0 ?((todo.checkedCount/todo.items.length*100)):0}}%</b>
+            {{Math.floor((todo.checkedCount/todo.items.length*100))}}
+            <uib-progressbar animate="false" value="todo.items.length>0 ?(todo.checkedCount/todo.items.length*100):0" type="success"></uib-progressbar>
+           <mycard ng-repeat="task in todo.items" add-member="addMemberToChecklist(task)" remove-task="removeTodoItem(task,todo,task.text)" check-list-id="todo._id" item-operation="operation" update-todo="updateTodoItem(task,todo,operation)" task="task" checklistid="todo._id"></mycard><!-- mycard is a component to display task -->
+             <!-- add new task -->
+           <!--   <li class="checklist-todos" ng-repeat="listItem in todo.items" ng-init="addMemberObj(listItem._id)">
+
+             <input type="checkbox" ng-model="listItem.checked" ng-click="updateTodoItem(listItem,todo)">
+
+             <span class="done-{{listItem.checked}} "  ng-mouseenter="itemHovering=true" ng-mouseleave="itemHovering=false">{{listItem.text}}
+
+             <a ng-click="removeTodoItem(listItem,todo,listItem.text)"  ng-show="itemHovering">
+
+                 <i class="fa fa-minus-circle"></i>
+               </a></span>
+
+         </li> -->
+              <md-card style="max-width:363px; min-width:363px">
+
+                <form name="addChecklistItem" novalidate ng-submit="addChecklistItem.$valid && addTodoItem(todo)">
+                  <md-input-container md-no-float class="md-block">
+                    <label>Add New Task</label>
+                    <input type="text" name="newTask" ng-model="todo.todoText" required>
+                    <div ng-messages="addChecklistItem.newTask.$error">
+                      <div ng-message="required">This is required!</div>
+                    </div>
+                  </md-input-container>
+                    <div ng-show="todo.todoText">
+                    <span layout="row">
+                          <div class="menu-bar-avatar" ng-repeat="member in todo.assignedMember" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+                          <img ng-src={{member.photo}} class="pic-avatar" ng-hide="member.photo == undefined" />
+                          <div ng-show="member.photo == undefined">
+
+                            <ng-letter-avatar data={{member.fullName}} charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+                          </div>
+                          <span class="remove-members fa fa-times" ng-hide="!hovering" ng-click="toggleMember(member,todo)"></span>
+                        </div>
+                    </span>
+                     <div layout="column">
+                       <md-input-container>
+                         <label>Assign Member</label>
+                        <input type="text" ng-model="newmemberName" >
+                       </md-input-container>
+
+                       <md-list ng-init="todo.assignedMember=[]">
+                         <md-list-item class="md-1-line md-long-text" ng-hide="!newmemberName" ng-repeat="member in storyData.memberList | filter:newmemberName" ng-click="toggleMember(member,todo)">{{member.fullName}}
+                        </md-list-item>
+                       </md-list>
+
+                    </div>
+                  <div layout="row">
+                    <md-input-container md-no-float class="md-block">
+                      <label>Enter Due Date</label>
+                      <input type="date" class="form-control ng-pristine ng-untouched ng-valid ng-empty" id="inputDate" name="newduedate" ng-model="todo.dueDate" date-parser="dd.MM.yyyy" aria-invalid="false" required>
+                      <div ng-messages="addChecklistItem.newduedate.$error">
+                        <div ng-message="required">Enter due Date!</div>
+                      </div>
+
+                    </md-input-container>
+
+
+                    <md-button class="md-fab md-mini  md-raised md-hue-2 md-raised md-warn pull-right" data-toggle="tooltip" title="Save" type="submit">
+                      <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    </md-button>
+                    </div>
+                    </div>
+                  </form>
+              </md-card>
+
+            </div>
+          </div>
+        </div>
+
+        <checklistgroup checklistgroup="storyData.checklist" storyid="storyData._id"></checklistgroup>
+        <br>
+        <hr class="story-seperator">
+        <div class="story-details clearfix">
+          <span class="pull-left story-left-head"><i class="fa fa-comments" aria-hidden="true"></i></span>
+          <div class="pull-left story-members">
+            <h3 class="story-sub-header">
+              Comments
+            </h3>
+            <textarea cols="50" placeholder="Enter Comments Here..." class="form-control " ng-model="storyComment"></textarea>
+            <!-- <a class="pull-right btn btn-success" ng-click="" >Save</a> -->
+            <a class="btn btn-default btn-xs desc-btn pull-right"ng-click="clearComment()" ><i class="fa fa-close"></i></a>
+            <a class="btn btn-default btn-xs desc-btn pull-right" ng-click="saveComment()" ng-disabled="!storyComment.length>0"><i class="fa fa-check"></i></a>
+          </div>
+          <div class="pull-left story-members">
+            <ul>
+              <li ng-repeat="comment in storyData.comments" class="story-comment-content">
+                <div class="story-comment-username">
+                  <b>{{comment.userName}}</b>
+                </div>
+                <span>{{comment.text}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="story-details clearfix">
+
+        </div>
+      <!-- <div class="">
+      Label:
+      <a ng-click="addLabel()"><i class="fa fa-plus" ></i></a>
+    </div> -->
+  </div>
+
+</div>
+
+<div class="col-sm-5 activityouterdiv">
+  <header>
+    <h3>
+      Activity
+    </h3></header>
+    <div class="activityinnerdiv" ng-include="'components/activity/activity.view.html'" style=""></div>
+
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><i class="fa fa-times-circle"></i></button>
+<h4 class="modal-title">Add Checklist Group</h4>
+</div>
+<form >
+<div class="modal-body">
+
+  <input type="text" ng-model="todoGroupText"  size="30"
+         placeholder="Checklist heading" class="form-control" autofocus >
+
+</div>
+<div class="modal-footer">
+<button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="addChecklistGroup()">Add</button>
+</div>
+</form>

@@ -1,0 +1,35 @@
+{
+    "login": {
+        "APP_NAME": "Limber",
+        "SIGNUP_MSG": "Enter email and password to log on:",
+        "TAG_LINE": "Manage your projects in a better way",
+        "SIGNIN_MSG": "Fill in the form below to get instant access:",
+        "SIGNUP": "Sign up",
+        "SEND_CODE":"Send me verification code",
+        "SIGNUP_BTN": "Sign me up!",
+        "SIGNIN": "Sign in",
+        "SIGNIN_BTN": "Sign in!",
+        "FORGOT_PASSWORD": "Forgot password?",
+        "PASSWORD_ERR":"Invalid Email or Password",
+        "EMAIL_ERR":"Entered email belongs to an existing account.Please login with same.",
+        "NAME":"Name",
+        "EMAIL": "Email",
+        "FNAME":"First Name",
+        "LNAME":"Last Name",
+        "PASSWORD":"Password",
+        "CPASSWORD":"Confirm Password",
+        "TEAM":" Team",
+        "VERIFY_MSG":"A verification code has been sent to your mail ID. Check your mail.",
+        "VERIFY":"Verify",
+        "ENTER_CODE":"Enter Code",
+        "FACEBOOK":"facebook",
+        "GOOGLE_PLUS":"Google Plus",
+        "RPASSWORD":"Password recovery",
+        "NPASSWORD":"Enter New Password",
+        "NCPASSWORD":"Confirm New Password",
+        "CHANGE_PASSWORD":"Chage password"
+    },
+    "home": {
+
+    }
+}

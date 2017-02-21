@@ -1,0 +1,73 @@
+<!-- start -->
+
+<!-- <md-content class="" layout-xs="column" layout="row" layout-wrap> -->
+
+	<md-card ng-init="editme=false">
+		<md-card-content layout="row"  >
+
+			<md-card-actions layout="column">
+				<md-checkbox class="md-icon-button" ng-model="$ctrl.task.checked"
+				data-toggle="tooltip" title="Mark as Done" ng-change="$ctrl.updateTodoItemComp($ctrl.task,$ctrl.checklistid,'check')" >
+			</md-checkbox>
+					<!-- <md-button class="md-fab md-mini  md-raised md-hue-2"  ng-click="showDiv = !showDiv"  >
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</md-button>
+
+					<md-button class="md-fab md-mini  md-raised md-hue-2 md-save" data-toggle="tooltip" ng-click="$ctrl.removeTaskComp(task)" title="Delete task">
+						<i class="fa fa-trash-o" aria-hidden="true"></i>
+					</md-button> -->
+				</md-card-actions>
+
+				<div layout="column">
+					<md-toolbar style="margin-left: 5px; max-width: 280px; min-width: 280px; border-radius:5px; background-color:#f1fcff" ng-mouseenter="taskhover=true" ng-mouseleave="taskhover=false">
+						<div  >
+							<div  ng-click="showDiv = !showDiv" ng-hide="showDiv" style="color:gray">{{$ctrl.task.text}}</div>
+							<md-input-container ng-show="showDiv" >
+								<label >Task</label>
+								<textarea  ng-model="$ctrl.task.text"	required></textarea>
+							</md-input-container>
+							<div class="label label-default pull-right md-raised" ng-show="taskhover" style="position: absolute;top: -10px;   right: 23px;  padding: 10px;" ng-click="showDiv = !showDiv" data-toggle="tooltip" data-toggle="tooltip" title="Edit Task"> <i class="fa fa-pencil-square-o"></i>
+							</div>		
+							<div class="label label-default pull-right md-raised " ng-show="taskhover" ng-click="$ctrl.removeTaskComp(task)" style="position: absolute;top: -10px;   right: -10px;  padding: 10px;" data-toggle="tooltip" title="Delete Task"> <i class="fa fa-trash"></i>
+							</div>
+						</div>
+
+
+					</md-toolbar>
+					<div ng-show="showDiv" style="margin-left: 5px; max-width: 280px; min-width: 280px; border-radius:5px; background-color:#f1fcff">
+
+						<label>Due Date</label>	<input style="background-color:#f1fcff" type="date" data-toggle="tooltip" title="Due Date" class="form-control ng-pristine ng-untouched ng-valid ng-empty pull-right" id="inputDate" ng-model="myDate" date-parser="dd.MM.yyyy" aria-invalid="false" >
+						<md-button class="md-icon-button md-accent pull-right" aria-label="Settings" ng-click="$ctrl.updateTodoItemComp($ctrl.task,$checklistid,'edit'); showDiv = !showDiv" data-toggle="tooltip" title="Save">
+							<i class="fa fa-floppy-o" aria-hidden="true"></i>
+						</md-button>
+
+						<md-button class="md-icon-button md-accent pull-right" aria-label="Favorite" data-toggle="tooltip" title="Cancel"  ng-click="showDiv = !showDiv" ><i class="fa fa-times" aria-hidden="true"></i></md-button>
+					</div>
+
+					<div data-toggle="tooltip" title="Due Date" class="label label-info pull-right md-raised "   ng-hide="showDiv">	
+						<span class=" pull-right" >Due Date:{{$ctrl.task.dueDate  | date:"dd/MM/yyyy"}} </span>
+					</div>
+				</div>
+
+			</md-card-content>
+		
+		<md-divider  layout="row" >
+			<div ng-repeat="member in $ctrl.task.assignedMember" ng-init="fullName=member.firstName+' '+member.lastName" data-toggle="tooltip" title="Assigned to {{member.firstName}} {{member.lastName}}">
+				<div class="avatar-wrapper" ng-show="member.photo == undefined">
+
+					<ng-letter-avatar data={{fullName}} charCount=2  avatarborder="true"height="30px" width="30px" fontSize="25px" ></ng-letter-avatar>
+
+				</div>
+			</div>
+			<md-button class="md-icon-button md-accent pull-right"  data-toggle="tooltip" title="Assign Member" ng-click="$ctrl.addMemberComp(task);">
+				<i class="fa fa-users" aria-hidden="true"></i>
+			</md-button>
+
+		</md-divider>
+
+
+	</md-card>
+
+
+<!-- </md-content>
+ -->

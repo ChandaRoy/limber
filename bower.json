@@ -1,0 +1,18 @@
+{
+  "name": "angular-markdown-directive",
+  "version": "0.3.1",
+  "main": "markdown.js",
+  "dependencies": {
+    "angular-sanitize": "^1.0.8",
+    "showdown": "~0.3.1",
+    "angular-url-encode": "^0.1.1",
+    "angular-smilies": "^1.3.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.0.8"
+  },
+  "resolutions": {
+    "showdown": "~0.3.1",
+    "angular": "1.5.7"
+  }
+}

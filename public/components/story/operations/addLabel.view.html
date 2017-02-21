@@ -1,0 +1,53 @@
+<!-- <script type="text/ng-template"  id="addMember.html"> -->
+
+<div class="modal-header">
+  <div ng-show="checked">
+    <button type="button" class="close" ng-click="cancel()"><i class="fa fa-times-circle"></i></button>
+    <h4 class="modal-title">Add label</h4>
+  </div>
+  <div ng-hide="checked">
+    <button type="button" class="close" ng-click="cancel()"><i class="fa fa-times-circle"></i></button>
+    <h4 class="modal-title">Create label</h4>
+  </div>
+</div>
+<div class="modal-body" ng-init="initLabels()">
+  <div class="form-group"  ng-show="checked">
+    <ul  class="list-group story-label-selectable-list" >
+      <li ng-repeat="listArray in labelsData">
+        <!-- <a class="fa fa-pencil pull-right story-label-selectable-edit story-label-template-selectable-anchor"  ></a> <!--edit-label---> 
+        <a ng-click="addRemoveLabel(listArray)">
+          <span class="story-label-design story-label-selectable story-label-{{listArray.colorName}}">
+          <i class="fa fa-check pull-right" ng-show = "storylabelsData.indexOf(listArray._id)!=-1"></i>
+          {{listArray.text}}
+        </span>
+        </a>
+      </li>
+    </ul>
+    <a ng-click="toggleLabel()" class="story-label-template-selectable-anchor pull-right "> Create label...</a>
+  </div>
+
+  <div class="" ng-hide="checked">
+
+    <input type="text" ng-model="labelTemplate.text" placeholder="Label Name..." class="form-control" autofocus>
+    <span ng-repeat="listArray in labelTemplateData">
+      <span class="story-label-design story-label-template-selectable  story-label-{{listArray.colorName}}" ng-click="createLabel(false,listArray)">
+        <i class="fa fa-check" ng-show = "selectedLabel.indexOf(listArray.colorName)!=-1"></i>
+      </span>
+    </span>
+
+  </div>
+
+</div>
+<div class="modal-footer">
+  <div ng-show="checked">
+    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="cancel()">Done</button>
+
+  </div>
+<div ng-hide="checked">
+
+  <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="toggleLabel();createLabel(true)">Create</button>
+  <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="toggleLabel()">Go back</button>
+</div>
+</div>
+
+<!-- </script> -->

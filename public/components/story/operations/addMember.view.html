@@ -1,0 +1,32 @@
+<!-- <script type="text/ng-template"  id="addMember.html"> -->
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()"><i class="fa fa-times-circle"></i></button>
+  <h4 class="modal-title">Add Member</h4>
+</div>
+<div class="modal-body" ng-init="initLoadMembers()">
+  <div class="form-group">
+    <input type="text" ng-model="memberName" name="memberSearch" placeholder="Search Member" class="form-control" autofocus>
+    <div id="modal-members">
+      <ul class="modal-members-list">
+        <li ng-click="addRemoveMembers(membersArray)" ng-repeat="membersArray in projMemberList |filter: memberName" class="list-group-item">
+          <a >
+            <i class="fa fa-check pull-right" ng-show = "membersData.indexOf(membersArray._id)!=-1"></i>
+            <img ng-src={{membersArray.photo}} class="pic-avatar" ng-hide="membersArray.photo == undefined" />
+            <div class="avatar-wrapper" ng-show="membersArray.photo == undefined">
+              <ng-letter-avatar data={{membersArray.fullName}} charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+            </div>
+
+
+            {{membersArray.fullName | limitTo:longDescLimit}}<span ng-hide="membersArray.fullName.length < longDescLimit ">
+              ...
+            </span>
+            </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="cancel()">Done</button>
+</div>
+<!-- </script> -->

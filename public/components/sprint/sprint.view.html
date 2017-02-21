@@ -1,0 +1,171 @@
+<!-- Start Modal Window-->
+<!-- End Modal--->
+
+<div id="mainSprint" ng-init="getSprints()">
+  <div class="container">
+
+    <div class="headingOfPage">
+      <tag ng-click="gotoProject()">{{projects[curProjectLoc].name}}</tag> <small> | </small> <tag ui-sref="release({ prId : projects[curProjectLoc]._id, releaseID: projects[curProjectLoc].release[curReleaseLoc]._id})">{{projects[curProjectLoc].release[curReleaseLoc].name}}</tag>
+    </div>
+    <div>
+      <div ng-style="{{topRowWidth}}">
+
+        <h4 class="sprintPage"><b class="fa fa-pie-chart" ng-click="displaySprintGraph()"></b> {{sprint.name}}<small> {{sprint.description | limitTo:longSprDescLimit }}<span ng-hide="sprint.description.length < longSprDescLimit || sprint.description.length==undefined">
+          ...
+        </span></small> <br/> <tiny>{{sprint.startDate|dateSuffix}}  - {{sprint.endDate |dateSuffix}}</tiny></h4>
+
+        <div class="divToggle pull-left scrollBtn">
+          <!-- <h3 class="toggleSprintText pull-left" ng-click="toggleScroll()">{{scrollBuglist}}</h3> -->
+          <span ng-click="scrollLeft()" class="toggleIcon fa fa-chevron-left"> </span>
+          <span ng-click="scrollRight()" class="toggleIcon fa fa-chevron-right"> </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sprintDiv" ng-style="{width: sprintWidth}">
+    <div class="list-wrapper backBugList">
+      <div id="backlogs" class='parent backbug' ng-class='{"extendParent":addToBacklog,"":!addToBacklog}' data-drop="true" jqyoui-droppable="{multiple:true,onOver: 'overCallback',onOut: 'outCallback',onDrop:'dropCallback_backbug'}">
+
+
+        <div class="listHead" id="Backlogs">
+          {{backBug.backlogs.listName}}
+        </div>
+        <div class="parentInner" id="backbug">
+
+          <div id="{{story._id}}" ng-repeat="story in backBug.backlogs.stories" class="child" ng-click="showModal(story._id, 'backBug',backBug._id,'Backlog')"
+          data-drag="true" data-jqyoui-options="{revert: 'invalid',helper:'clone'}" jqyoui-draggable="{index: {{$index}},onStart:'startCallback(item, $index)',onStop:'stopCallback(item,$index)'}">
+          <div class="story_Name">
+            {{story.heading}}
+          </div>
+
+          <div class="storyAttributes">
+            <span ng-show="story.indicators.descriptionStatus"><i class="fa fa-sticky-note" aria-hidden="true"></i></span>
+            <span ng-show="story.indicators.commentCount != 0"><i class="fa fa-comment-o" aria-hidden="true"></i> {{story.indicators.commentCount}}</span>
+            <span ng-show="story.indicators.attachmentsCount != 0"><i class="fa fa-paperclip" aria-hidden="true"></i> {{story.indicators.attachmentsCount}}</span>
+            <span ng-show="story.indicators.chklstItmsCnt != 0"><i class="fa fa-check-square-o" aria-hidden="true"></i> {{story.indicators.chklstItmsChkdCnt}} / {{story.indicators.chklstItmsCnt}}</span>
+            <span ng-show="story.issueNumber==null && story.githubSync!=null"><i class="fa fa-exclamation"></i></span>
+          </div>
+        </div>
+        <div class="child drag-dummy">
+          <div class="story_Name">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="showAddDetails" ng-show="addToBacklog" ng-blur="hideBacklogAddDetails()">
+      <textarea name="details" class="form-control" placeholder="Story details" ng-model="BacklogstoryDetails" id = 'backlogTxt' />
+      <div class="col-sm-4">
+        <button ng-click="addStory(backBug.backlogs.listName, BacklogstoryDetails,backBug.backlogs.listName); BacklogstoryDetails=''; addToBacklog = false" type="button" class="btn btn-success">Add</button>
+      </div>
+      <div class="col-sm-4">
+        <button ng-click="addToBacklog = false" type="button" class="btn btn-link"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
+    </form>
+    <div class="showAdd" ng-hide="addToBacklog" ng-click="clickOnAdd('backlogTxt'); addToBacklog = true;">
+      <span>+</span>
+      <!-- Add Story... -->
+    </div>
+  </div>
+
+
+  <!-- List -->
+  <div class="list-wrapper" ng-repeat="listItem in sprint.list">
+    <div id="{{listItem._id}}"  ng-class='{"extendParent":clicked,"":!clicked,"":showTrash,"dontShowTrash":!showTrash}' data-drop="true" jqyoui-droppable="{multiple:true,onOver: 'overCallback',onOut: 'outCallback',onDrop:'dropCallback'}" class='parent {{listItem.group}}' scroll-to-bottom="clicked" ng-mouseenter="showTrash=true" ng-mouseleave="showTrash=false" >
+      <!-- <div class='crossBtn'>
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </div> -->
+
+    <div class="listHead" id="{{listItem.group}}">
+      {{listItem.listName}}
+    </div>
+
+    <div class="parentInner" id="list">
+
+      <div id="{{story._id}}" ng-repeat="story in listItem.stories" class="child"data-drag="true" data-jqyoui-options="{revert: 'invalid',helper:'clone'}"
+      jqyoui-draggable="{index: {{$index}},onStart:'startCallback(item, $index)',onStop:'stopCallback(item,$index)'}" ng-click="showModal(story._id, listItem.group,listItem._id,listItem.listName)">
+      <div class="story_Name">
+        {{story.heading}}
+
+      </div>
+      <div class="storyAttributes">
+        <span ng-show="story.indicators.descriptionStatus"><i class="fa fa-sticky-note" aria-hidden="true"></i></span>
+        <span ng-show="story.indicators.commentCount != 0"><i class="fa fa-comment-o" aria-hidden="true"></i> {{story.indicators.commentCount}}</span>
+        <span ng-show="story.indicators.attachmentsCount != 0"><i class="fa fa-paperclip" aria-hidden="true"></i> {{story.indicators.attachmentsCount}}</span>
+        <span ng-show="story.indicators.chklstItmsCnt != 0"><i class="fa fa-check-square-o" aria-hidden="true"></i> {{story.indicators.chklstItmsChkdCnt}} / {{story.indicators.chklstItmsCnt}}</span>
+        <span ng-show="story.issueNumber==null && story.githubSync!=null"><i class="fa fa-exclamation"></i></span>
+      </div>
+    </div>
+    <div class="child drag-dummy">
+      <div class="story_Name">
+
+      </div>
+    </div>
+  </div>
+  <!-- <i class="crossBtn fa fa-times-circle"></i> -->
+
+</div>
+<form class="showAddDetails" ng-class="{'showAddIcon':clicked,'hideAdd':!clicked}">
+  <textarea name="details" class="form-control" placeholder="Story details" id = "{{listItem._id}}Txt" ng-model="storyDetails" />
+  <div class="col-sm-4">
+    <button ng-click="addStory(listItem.group, storyDetails, listItem._id, listItem.listName)?clicked=false:clicked=true; storyDetails=''; gotoTop(listItem._id)" type="button" class="btn btn-success">Add</button>
+  </div>
+  <div class="col-sm-4">
+    <button ng-click="clicked=false" type="button" class="btn btn-link"><i class="fa fa-times" aria-hidden="true"></i></button>
+  </div>
+</form>
+<div class='showAdd' ng-class="{'showAddIcon':!clicked,'hideAdd':clicked}" ng-click="clickOnAdd(listItem._id + 'Txt'); clicked=true;">
+  <span>+</span>
+  <!-- Add Story... -->
+</div>
+</div>
+
+<div class="list-wrapper backBugList">
+  <div id="buglists" class='parent backbug' ng-class='{"extendParent":addToBuglist,"":!addToBuglist}'  data-drop="true" jqyoui-droppable="{multiple:true,onOver: 'overCallback',onOut: 'outCallback',onDrop:'dropCallback_backbug'}">
+    <div class="listHead" id="BugLists">
+      {{backBug.buglist.listName}}
+    </div>
+    <div class="parentInner" id="backbug">
+
+      <div id="{{story._id}}" ng-repeat="story in backBug.buglist.stories" class="child" ng-click="showModal(story._id, 'backBug',backBug._id,'Buglist')" data-drag="true" data-jqyoui-options="{revert: 'invalid',helper:'clone'}"
+      jqyoui-draggable="{index: {{$index}},onStart:'startCallback(item, $index)',onStop:'stopCallback(item,$index)'}">
+      <div class="story_Name">
+        {{story.heading}}
+      </div>
+      <div class="storyAttributes">
+        <span ng-show="story.indicators.descriptionStatus"><i class="fa fa-sticky-note" aria-hidden="true"></i></span>
+        <span ng-show="story.indicators.commentCount != 0"><i class="fa fa-comment-o" aria-hidden="true"></i> {{story.indicators.commentCount}}</span>
+        <span ng-show="story.indicators.attachmentsCount != 0"><i class="fa fa-paperclip" aria-hidden="true"></i> {{story.indicators.attachmentsCount}}</span>
+        <span ng-show="story.indicators.chklstItmsCnt != 0"><i class="fa fa-check-square-o" aria-hidden="true"></i> {{story.indicators.chklstItmsChkdCnt}} / {{story.indicators.chklstItmsCnt}}</span>
+        <span ng-show="story.issueNumber==null && story.githubSync!=null" ><i class="fa fa-exclamation"></i></span>
+      </div>
+    </div>
+    <div class="child drag-dummy">
+      <div class="story_Name">
+
+      </div>
+    </div>
+  </div>
+</div>
+<form class="showAddDetails" ng-show="addToBuglist">
+  <textarea name="details" class="form-control" placeholder="Story details" ng-model="BugliststoryDetails" id = 'buglistTxt'/>
+  <div class="col-sm-4">
+    <button ng-click="addStory(backBug.buglist.listName, BugliststoryDetails,backBug.buglist.listName); BugliststoryDetails='';addToBuglist = false" type="button" class="btn btn-success">Add</button>
+  </div>
+  <div class="col-sm-4">
+    <button ng-click="addToBuglist = false" type="button" class="btn btn-link"><i class="fa fa-times" aria-hidden="true"></i></button>
+  </div>
+</form>
+<div class="showAdd" ng-hide="addToBuglist" ng-click="clickOnAdd('buglistTxt'); addToBuglist = true;">
+
+  <span>+</span>
+  <!-- Add Story... -->
+</div>
+</div>
+
+
+</div>
+
+</div>
+
+<div ng-include="'components/activity/menu.view.html'"></div>

@@ -1,0 +1,24 @@
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
+        <h4 class="modal-title">Link Project to Github Repo</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+
+        <div ng-repeat="repo in githubRepos | filter: {permissions:{admin:'true'}}">
+          <label>
+            <input type="radio" name="selectedRepo" ng-model="$parent.selectedRepo" value="{{repo}}">
+            Name:{{repo.name}} | Owner:{{repo.owner.login}} (URL: {{repo.html_url}})
+
+          </label><br/>
+
+        </div>
+  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="close()" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="linkRepo()" >Link</button>
+
+      </div>

@@ -1,0 +1,77 @@
+<div class="menu-bar pull-right panel panel-default" ng-controller="menuController" ng-show="isMenu">
+  <div class="panel-heading menu-panel-heading">Menu
+    <button type="button" id="sideBarClose" class="close" ng-click="SlideMenu()" style="color:white"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="panel-body">
+
+    <div class="menu-wrap">
+      <div class="settings-members">
+        <h3></span>Members</h3>
+        <div class="menu-bar-avatar" ng-repeat="member in projMemberList" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+          <div>
+            <img ng-src={{member.photo}}  uib-tooltip={{member.fullName}} class="pic-avatar" ng-hide="member.photo == undefined" />
+            <div class="avatar-ng" uib-tooltip={{member.fullName}}  ng-show="member.photo == undefined">
+              <ng-letter-avatar data="{{member.fullName}}" charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+            </div>
+            <span class="remove-members fa fa-times" ng-hide="!hovering" ng-click="removeMember(member._id)"></span>&nbsp;
+          </div>
+        </div>
+      </div>
+
+
+      <div class="add-members">
+        <div>
+          <button class="btn btn-success btn-add" data-toggle="modal" data-target="#myModal" ng-click="getAllUsers()"><span class="glyphicon glyphicon-user"></span> Add Members</button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+                <h4 class="modal-title">Add Members</h4>
+              </div>
+              <div class="modal-body">
+                <div class="clearfix">
+                  <div class="clearfix avatars-wrap">
+                    <div class="menu-bar-avatar" ng-repeat="member in projMemberList" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+                      <div>
+                        <img ng-src={{member.photo}} class="pic-avatar" ng-hide="member.photo == undefined" />
+                        <div ng-show="member.photo == undefined">
+                          <ng-letter-avatar data="{{member.fullName}}" charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+                        </div>
+                        <span class="remove-members fa fa-times" ng-hide="!hovering" ng-click="removeMember(member._id)"></span>&nbsp;
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div>
+                  <form>
+                    <autocomplete ng-model="addedUserEmail" data="dbUsers" attr-placeholder="Enter user email..."></autocomplete>
+                    <!-- <a ng-click="addMember()" type="submit" class="addLst"><i class="fa fa-plus" aria-hidden="true"></i></a> -->
+
+                  </form>
+
+                  <!-- <input class="txt-add-members" id="txtAddMember" name="txtAddMember" type="text" placeholder="e.g. you@fragile.com" ng-model="members" required> -->
+
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" ng-click="addMember()" >Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-include="'components/activity/activity.view.html'"></div>
+
+    </div>
+
+  </div>
+</div>

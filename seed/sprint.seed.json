@@ -1,0 +1,107 @@
+{
+  "_id": {
+    "$oid": "57026b2f140731cc1810b5ba"
+  },
+  "name": "Sprint 1",
+  "endDate": {
+    "$date": "2016-04-04T13:25:03.312Z"
+  },
+  "startDate": {
+    "$date": "2016-04-04T13:25:03.312Z"
+  },
+  "description": "Description String 2",
+  "list": [{
+    "group": "inProgress",
+    "listName": "Picked",
+    "_id": {
+      "$oid": "57026b2f140731cc1810b5bf"
+    },
+    "stories": [{
+      "$oid": "570e69785e0aceb5b1cb37ed"
+    },{
+      "$oid": "570e69785e0aceb5b1cb37ee"
+    }]
+  }, {
+    "group": "inProgress",
+    "listName": "In progress",
+    "_id": {
+      "$oid": "57026b2f140731cc1810b5be"
+    },
+    "stories": [{
+      "$oid": "570e69785e0aceb5b1cb37ef"
+    }]
+  }, {
+    "group": "inProgress",
+    "listName": "SSSSSSS",
+    "_id": {
+      "$oid": "57026b2f140731cc1810b5bd"
+    },
+    "stories": []
+  }, {
+    "group": "inProgress",
+    "listName": "AAAAAA",
+    "_id": {
+      "$oid": "57026b2f140731cc1810b5bc"
+    },
+    "stories": []
+  }, {
+    "group": "Releasable",
+    "listName": "Releasable",
+    "_id": {
+      "$oid": "57026b2f140731cc1810b5bb"
+    },
+    "stories": []
+  }],
+  "labelTemplate": [],
+  "__v": 0
+} {
+  "_id": {
+    "$oid": "57026bfd140731cc1810b5c0"
+  },
+  "name": "Sprint 2",
+  "endDate": {
+    "$date": "2016-04-04T13:28:29.517Z"
+  },
+  "startDate": {
+    "$date": "2016-04-04T13:28:29.517Z"
+  },
+  "description": "Description String 2",
+  "list": [{
+    "group": "inProgress",
+    "listName": "Picked",
+    "_id": {
+      "$oid": "57026bfd140731cc1810b5c5"
+    },
+    "stories": []
+  }, {
+    "group": "inProgress",
+    "listName": "In progress",
+    "_id": {
+      "$oid": "57026bfd140731cc1810b5c4"
+    },
+    "stories": []
+  }, {
+    "group": "inProgress",
+    "listName": "SSSSSSS",
+    "_id": {
+      "$oid": "57026bfd140731cc1810b5c3"
+    },
+    "stories": []
+  }, {
+    "group": "inProgress",
+    "listName": "AAAAAA",
+    "_id": {
+      "$oid": "57026bfd140731cc1810b5c2"
+    },
+    "stories": []
+  }, {
+    "group": "Releasable",
+    "listName": "Releasable",
+    "_id": {
+      "$oid": "57026bfd140731cc1810b5c1"
+    },
+    "stories": []
+  }],
+  "labelTemplate": [],
+  "__v": 0
+}

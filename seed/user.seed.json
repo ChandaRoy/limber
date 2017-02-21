@@ -1,0 +1,44 @@
+{
+  "_id": {
+    "$oid": "56efe4afb0d86f2b174916fe"
+  },
+  "firstName": "Soumitra",
+  "lastName": "Kar",
+  "email": "sksoumitrakar@gmail.com",
+  "password": "password"
+}
+{
+  "_id": {
+    "$oid": "570395a239dc5fbac028505b"
+  },
+  "firstName": "Soumitra",
+  "lastName": "Kar",
+  "email": "sksoumitrakar@gmail.com",
+  "password": "password",
+  "projects": [{
+    "$oid": "57026055772a712a164d70bb"
+  }]
+}
+{
+  "_id": {
+    "$oid": "570395a239dc5fbac028505c"
+  },
+  "firstName": "Gowtham",
+  "lastName": "Hosur",
+  "email": "ghosur@gmail.com",
+  "password": "password",
+  "projects": [{
+    "$oid": "57026055772a712a164d70bb"
+  }, {
+    "$oid": "57026064772a712a164d70bd"
+  }]
+}
+{
+  "_id": {
+    "$oid": "570395a239dc5fbac028505d"
+  },
+  "firstName": "Akshay",
+  "lastName": "Arora",
+  "email": "ak.ar@gmail.com",
+  "password": "password"
+}

@@ -1,0 +1,364 @@
+{
+    "_id": {
+        "$oid": "56efe4afb0d86f2b174916fe"
+    },
+    "firstName": "Soumitra",
+    "lastName": "Kar",
+    "email": "sksoumitrakar@gmail.com",
+    "password": "password"
+} {
+    "_id": {
+        "$oid": "570395a239dc5fbac028505b"
+    },
+    "firstName": "Soumitra",
+    "lastName": "Kar",
+    "email": "sksoumitrakar@gmail.com",
+    "password": "password",
+    "projects": [{
+        "$oid": "57026055772a712a164d70bb"
+    }]
+} {
+    "_id": {
+        "$oid": "570395a239dc5fbac028505c"
+    },
+    "firstName": "Gowtham",
+    "lastName": "Hosur",
+    "email": "ghosur@gmail.com",
+    "password": "password",
+    "projects": [{
+        "$oid": "57026055772a712a164d70bb"
+    }, {
+        "$oid": "57026064772a712a164d70bd"
+    }]
+} {
+    "_id": {
+        "$oid": "570395a239dc5fbac028505d"
+    },
+    "firstName": "Akshay",
+    "lastName": "Arora",
+    "email": "ak.ar@gmail.com",
+    "password": "password"
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a534fc"
+    },
+    "firstName": "do anim laboris non",
+    "lastName": "exercitation",
+    "createdDate": {
+        "$date": "2016-02-22T20:24:54.638Z"
+    },
+    "updatedDate": {
+        "$date": "2016-05-26T10:07:48.249Z"
+    },
+    "password": "password",
+    "email": "Garth_Collins9@yahoo.com",
+    "initials": "sh",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a534fd"
+    },
+    "firstName": "dolore nulla",
+    "lastName": "culpa qui in",
+    "createdDate": {
+        "$date": "2015-06-18T17:40:46.295Z"
+    },
+    "updatedDate": {
+        "$date": "2016-05-15T20:45:46.686Z"
+    },
+    "password": "password",
+    "email": "Marjory_Hudson@gmail.com",
+    "initials": "ak",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a534fe"
+    },
+    "firstName": "laboris veniam dolor",
+    "lastName": "ipsum sint",
+    "createdDate": {
+        "$date": "2016-04-10T17:36:43.136Z"
+    },
+    "updatedDate": {
+        "$date": "2016-09-09T18:39:12.579Z"
+    },
+    "password": "password",
+    "email": "Dax89@hotmail.com",
+    "initials": "go",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a534ff"
+    },
+    "firstName": "et elit voluptate id",
+    "lastName": "culpa in velit",
+    "createdDate": {
+        "$date": "2015-09-29T23:07:36.777Z"
+    },
+    "updatedDate": {
+        "$date": "2016-06-02T14:36:09.955Z"
+    },
+    "password": "password",
+    "email": "Maritza_Schamberger89@yahoo.com",
+    "initials": "sh",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53500"
+    },
+    "firstName": "cillum Excepteur",
+    "lastName": "sed",
+    "createdDate": {
+        "$date": "2015-08-16T05:32:13.588Z"
+    },
+    "updatedDate": {
+        "$date": "2016-04-26T01:15:04.429Z"
+    },
+    "password": "password",
+    "email": "Juliana44@yahoo.com",
+    "initials": "su",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53501"
+    },
+    "firstName": "labore proident ex",
+    "lastName": "sunt nulla dolore commodo",
+    "createdDate": {
+        "$date": "2015-09-16T18:17:50.175Z"
+    },
+    "updatedDate": {
+        "$date": "2017-01-19T08:43:56.336Z"
+    },
+    "password": "password",
+    "email": "Paxton_Bartoletti79@yahoo.com",
+    "initials": "vi",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53502"
+    },
+    "firstName": "deserunt ut in cupidatat",
+    "lastName": "laborum mollit ad sed",
+    "createdDate": {
+        "$date": "2015-12-14T06:23:00.595Z"
+    },
+    "updatedDate": {
+        "$date": "2016-12-23T01:57:25.635Z"
+    },
+    "password": "password",
+    "email": "Jolie_Sporer73@hotmail.com",
+    "initials": "ak",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53503"
+    },
+    "firstName": "exercitation laborum occ",
+    "lastName": "Excepteur aliquip do",
+    "createdDate": {
+        "$date": "2016-02-10T07:37:03.833Z"
+    },
+    "updatedDate": {
+        "$date": "2016-06-20T06:08:21.429Z"
+    },
+    "password": "password",
+    "email": "Anne_Stehr@yahoo.com",
+    "initials": "vi",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53504"
+    },
+    "firstName": "minim ipsum ullamco eiusmod",
+    "lastName": "magna dolore tempor aliquip",
+    "createdDate": {
+        "$date": "2015-10-24T07:57:13.178Z"
+    },
+    "updatedDate": {
+        "$date": "2017-01-07T06:07:15.801Z"
+    },
+    "password": "password",
+    "email": "Samson_Russel@hotmail.com",
+    "initials": "vi",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53505"
+    },
+    "firstName": "est sint esse dolor",
+    "lastName": "ut exercitation",
+    "createdDate": {
+        "$date": "2015-09-12T03:40:47.142Z"
+    },
+    "updatedDate": {
+        "$date": "2017-04-12T09:42:18.614Z"
+    },
+    "password": "password",
+    "email": "Randall.Heathcote@gmail.com",
+    "initials": "vi",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53506"
+    },
+    "firstName": "aliquip ullamco irure cupidatat",
+    "lastName": "exercitation qui",
+    "createdDate": {
+        "$date": "2016-01-15T06:47:09.043Z"
+    },
+    "updatedDate": {
+        "$date": "2016-04-25T04:03:02.491Z"
+    },
+    "password": "password",
+    "email": "Cordie_Kub72@gmail.com",
+    "initials": "sh",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53507"
+    },
+    "firstName": "sed fugiat laborum consectetur",
+    "lastName": "dolore ad veniam pariatur",
+    "createdDate": {
+        "$date": "2016-01-17T07:43:20.360Z"
+    },
+    "updatedDate": {
+        "$date": "2016-08-23T21:37:21.514Z"
+    },
+    "password": "password",
+    "email": "Trent30@gmail.com",
+    "initials": "ab",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53508"
+    },
+    "firstName": "elit proident aute Lorem",
+    "lastName": "minim",
+    "createdDate": {
+        "$date": "2015-06-14T06:31:06.398Z"
+    },
+    "updatedDate": {
+        "$date": "2016-10-04T22:41:24.612Z"
+    },
+    "password": "password",
+    "email": "Emmitt.Smith19@yahoo.com",
+    "initials": "ak",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a53509"
+    },
+    "firstName": "sunt eu",
+    "lastName": "aliquip",
+    "createdDate": {
+        "$date": "2015-11-12T08:35:29.899Z"
+    },
+    "updatedDate": {
+        "$date": "2017-01-22T01:02:52.916Z"
+    },
+    "password": "password",
+    "email": "Adalberto_OConnell71@yahoo.com",
+    "initials": "ak",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a5350a"
+    },
+    "firstName": "dolore",
+    "lastName": "ullamco laboris veniam fugiat",
+    "createdDate": {
+        "$date": "2015-10-24T06:37:22.799Z"
+    },
+    "updatedDate": {
+        "$date": "2017-02-11T01:21:29.728Z"
+    },
+    "password": "password",
+    "email": "Jovani33@yahoo.com",
+    "initials": "go",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a5350b"
+    },
+    "firstName": "non esse",
+    "lastName": "minim",
+    "createdDate": {
+        "$date": "2015-07-30T11:43:55.030Z"
+    },
+    "updatedDate": {
+        "$date": "2016-09-02T01:30:47.226Z"
+    },
+    "password": "password",
+    "email": "Griffin51@hotmail.com",
+    "initials": "ak",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a5350c"
+    },
+    "firstName": "cil",
+    "lastName": "incididunt ipsum mollit non",
+    "createdDate": {
+        "$date": "2015-05-28T17:43:44.625Z"
+    },
+    "updatedDate": {
+        "$date": "2017-02-22T05:23:08.661Z"
+    },
+    "password": "password",
+    "email": "Reba.Homenick55@gmail.com",
+    "initials": "vi",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a5350d"
+    },
+    "firstName": "qui",
+    "lastName": "enim ad minim",
+    "createdDate": {
+        "$date": "2016-03-24T14:06:36.821Z"
+    },
+    "updatedDate": {
+        "$date": "2017-01-17T09:38:23.509Z"
+    },
+    "password": "password",
+    "email": "Nellie.Herzog@yahoo.com",
+    "initials": "go",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+} {
+    "_id": {
+        "$oid": "570f5a3b965789b509a5350e"
+    },
+    "firstName": "dolor irure repre",
+    "lastName": "irure nisi enim sed",
+    "createdDate": {
+        "$date": "2015-12-19T09:45:08.717Z"
+    },
+    "updatedDate": {
+        "$date": "2016-09-07T09:46:16.586Z"
+    },
+    "password": "password",
+    "email": "Makayla7@hotmail.com",
+    "initials": "su",
+    "imageUrl": "http://placehold.it/150x150",
+    "projects": []
+}

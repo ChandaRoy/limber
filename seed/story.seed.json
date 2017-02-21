@@ -1,0 +1,26 @@
+{
+  "_id": {
+    "$oid": "570e69785e0aceb5b1cb37ed"
+  },
+  "heading": "Story 1",
+  "memberList": [{
+    "$oid": "570395a239dc5fbac028505b"
+  }]
+
+} {
+  "_id": {
+    "$oid": "570e69785e0aceb5b1cb37ee"
+  },
+  "heading": "Story 2",
+  "memberList": [{
+    "$oid": "570395a239dc5fbac028505b"
+  }]
+} {
+  "_id": {
+    "$oid": "570e69785e0aceb5b1cb37ef"
+  },
+  "heading": "Story 3",
+  "memberList": [{
+    "$oid": "570395a239dc5fbac028505b"
+  }]
+}

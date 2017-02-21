@@ -1,0 +1,18 @@
+<!-- <script type="text/ng-template"  id="addMember.html"> -->
+<div class="modal-header">
+  <h4 class="modal-title">Add Attachments</h4>
+</div>
+<div class="modal-body">
+  <form name="form">
+    <label for="">{{file.name}}</label>
+    <button class="btn btn-primary" ngf-select ng-model="file" ngf-max-size="10MB" name="file" ngf-pattern="'*/*'"
+    ngf-accept="'*/*'" >Attach the file</div>
+    <div style='align:center'>  ( Note: Maximium limit to upload is 10MB)</div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-success" type="submit" ng-click="submit()">Upload</button>
+  <button class="btn btn-danger" type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Cancel</button>
+
+</div>
+<!-- </script> -->

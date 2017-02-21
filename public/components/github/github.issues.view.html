@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
+  <h4 class="modal-title">View Issues for linked Repository</h4>
+</div>
+<div class="modal-body">
+
+  <div class="form-group" ng-if="githubissues.length!=0">
+    <h3>Open Issues from {{githubRepo}}<h3>
+  <div ng-repeat="issue in githubissues">
+    <label>
+      <input id={{issue.id}} type="checkbox" name="" value="{{issue.id}}" ng-click="toggleSelection(issue)" ng-disabled="filterExistingIssue(issue)">
+      Title: {{issue.title}} #{{issue.number}}<br/>
+      <!-- Description: {{issue.body}}
+      Assignees:
+      <div ng-repeat="assignee in issue.assignees" layout="row">
+        <img src="{{assignee.avatar_url}}" alt="" style="height=20px">
+      </div> -->
+
+
+    </label><br/>
+
+  </div>
+</div>
+<div ng-if="githubissues.length==0">
+  <h3>No issues in the Repository {{githubRepo}}</h3>
+</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="close()">Close</button>
+  <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="createStory()" ng-disabled="githubissues.length===0 || githubissues.length===syncedissues.length">Create Story</button>
+
+</div>

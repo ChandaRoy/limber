@@ -1,0 +1,211 @@
+<div class=" pull-right"  ng-controller="chatController as ctrl" >
+
+
+  <!--chat icon -->
+  <div  >
+    <div  >
+      <md-content class="chatStrip" ng-cloak>
+        <md-list  ng-cloak="" class="listdemoListControls" >
+
+          <md-subheader class="md-no-sticky"><i class="fa fa-users"></i> Chat</md-subheader>
+
+          <md-list-item ng-repeat="project in projects" id="myList" ng-click="openLeftMenu(project)" >
+
+            <p id={{project._id}} class="active"> {{ project.name }} </p>
+
+
+          </md-list-item>
+
+        </md-list>
+      </md-content>
+      <md-sidenav md-component-id="left" class="md-sidenav-right"  ng-cloak  style="position:fixed" layout="row">
+
+        <div class="col-md-8" style="height:100%;padding:0px" id={{room.channelId}}>
+
+
+          <md-content style="height:100%">
+            <md-subheader class="md-primary header" ng-show="room" style="background:#55C7AD;">{{room.fullName}} <i class="fa fa-close fa-2x" ng-click="openLeftMenu(project)" style="float:right"></i>  </md-subheader>
+            <md-subheader class="md-primary header" ng-hide="room" style="background:#55C7AD;height:45px"><i class="fa fa-close fa-2x" ng-click="openLeftMenu(project)" style="float:right"></i>  </md-subheader>
+
+            <div style=" overflow-y:scroll;height:78%;padding:12px" scroll-bottom="scroller">
+              <section >
+                <md-subheader class="md-primary header" ng-show="room.typeOfchat=='personal'" > {{member.fullName}}  </md-subheader>
+
+                <div layout="row"  layout-align="center center" ng-show="!room">
+                  <i class="fa fa-weixin fa-5x " style="color:orange"></i>
+                  <p>  Start using Limber Chat!</p>
+                </div>
+
+                <!-- <div ng-repeat="topicMsg in messages" >
+                  <md-whiteframe ng-repeat="msg in topicMsg.message"  class="md-whiteframe-z2 message" layout layout-align="" style="border-radius:9px"  ng-show="topicMsg.topicId===topic">
+                    <div class="md-list-item-text"  >
+                      <b>{{ msg.sentBy.fullName }}</b>
+                      <p ng-bind-html="msg.message|smilies"></p>
+                    </div>
+                  </md-whiteframe>
+                </div> -->
+                <md-list  flex  class="message" ng-show="room">
+                  <md-list-item ng-repeat="message in messages[topic]"  class="" ng-click="null">
+                    <div class="md-list-item-text" layout="column" >
+<!-- {{message}} -->
+                      <h4>{{ message.sentBy.fullName }}</h4>
+                      <p ng-bind-html="message.text|smilies" style="color:black"></p>
+                    </div>
+                  </md-list-item>
+                </md-list>
+
+                <br><br>
+              </section>
+            </div>
+            <md-divider id="bottom"></md-divider>
+            <div id="footer">
+              <!-- <md-input-container > -->
+              <!-- <textarea ng-model="message" placeholder="Type your message here" columns="2" md-maxlength="150"  ng-enter="send(message)" id="msgBox" style="width:98%"></textarea> -->
+              <div class="input-group" style="" ng-show="room" >
+                <span class="input-group-addon"
+                smilies-selector="message"
+                smilies-placement="right"
+                smilies-title="Smilies"></span>
+                <span class="input-group-addon chatInput" style="width:100%">   <textarea ng-model="message" focus-on-change="message"  class="form-control "  ng-keydown="($event.which === 13 && !$event.shiftKey) && send()" > </textarea></span>
+                <!-- <span class="input-group-addon">
+                  <md-menu style="z-index:3009!important" md-position-mode="target-right target" md-menu-backdrop>
+                    <i class="material-icons" style="color:#4c9689;font-size: 20px;" ng-click="$mdOpenMenu($event)">note_add</i>
+                    <md-menu-content width="3" >
+                      <md-menu-item>
+                        <md-button ng-click="" ngf-select ng-model="file" ngf-max-size="10MB" name="file" ngf-pattern="'*/*'" ngf-accept="'*/*'"> Attach a file </md-button>
+
+                      </md-menu-item>
+                      <md-menu-item >
+                        <md-button ng-click=""> Create a Snippet </md-button>
+                      </md-menu-item>
+                    </md-menu-content>
+                  </md-menu>
+                </span> -->
+              </div>
+              <!-- <button class="btn btn-info" ng-click="send()" ng-show="room">Send</button> -->
+
+              <!-- </md-input-container> -->
+
+            </div>
+          </md-content>
+
+        </div>
+        <div class="col-md-4" id={{project._id}}>
+
+          <md-header class="overflow_ellipsis" id="projectName" >{{project.name}}</md-header>
+          <md-subheader class="overflow_ellipsis">  <i class="fa fa-circle" id="active" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<span id="teamMembers" class="active">{{userProfile.fullName}} (me)</span></md-subheader>
+
+
+          <br><br>
+          <md-divider></md-divider>
+          <md-list class="md-dense" flex>
+            <md-subheader class="md-no-sticky overflow_ellipsis" id="heading">DIRECT MESSAGES</md-subheader>
+            <md-list-item class="" ng-repeat="member in projMemberList" ng-click="chat(member,project._id)" ng-hide="member._id===userProfile._id">
+              <i class="fa fa-circle" id={{member.chatStatus}}></i> &nbsp;&nbsp;
+              <span> <h3 id="teamMembers" >{{ member.fullName }}</h3>
+
+              </span>
+            </md-list-item>
+          </md-list>
+          <br><br>
+          <!-- <md-header id="projectName"  class=" md-raised" ng-click="inviteUser($event,project)">Invite People</md-header> -->
+
+          <md-divider></md-divider>
+        </div>
+      </md-sidenav>
+    </div>
+
+
+    <!-- create group dialog -->
+    <script type="text/ng-template" id="dialog1.tmpl.html">
+      <md-dialog aria-label="Create Group"  ng-cloak  layout-fill class="fullscreen-dialog">
+        <form>
+          <md-toolbar>
+            <div class="md-toolbar-tools">
+              <h2>Create Group for {{project.name}}</h2>
+              <span flex></span>
+              <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+              </md-button>
+            </div>
+          </md-toolbar>
+
+          <md-dialog-content>
+            <div class="md-dialog-content">
+              <md-content class="container form-group">
+                <md-input-container md-no-float="" class="">
+                  <md-icon ><i class="material-icons">group_add</i></md-icon>
+                  <input ng-model="user.name" type="text" placeholder="#group name" ng-required="true">
+                </md-input-container>
+                <br>
+                <md-input-container md-no-float="" class="">
+                  <md-icon ><i class="material-icons">assignment</i></md-icon>
+                  <input ng-model="user.phone" type="text" placeholder="Purpose">
+                </md-input-container>
+                <br>
+                <md-input-container class="" md-no-float=""  class="form-control">
+                  <md-icon ><i class="material-icons">mail</i></md-icon>
+                  <input ng-model="memberName" type="text" placeholder="Invite" ng-required="true" list="members">
+                  <datalist id="members">
+                    <option ng-repeat="member in project.memberList" value="{{member.email}}"/>
+                  </datalist>
+                </md-input-container>
+                <br>
+                <md-button class="btn btn-raised" ng-click="createChannel()">Create</md-button>
+                <md-button class="btn btn-raised" ng-click="cancel()">Cancel</md-button>
+              </md-content>
+            </div>
+          </md-dialog-content>
+        </form>
+      </md-dialog>
+    </script>
+
+    <!-- invite people -->
+    <!-- create group dialog -->
+    <script type="text/ng-template" id="dialog2.tmpl.html">
+      <md-dialog aria-label="Create Group"  ng-cloak  layout-fill class="fullscreen-dialog">
+        <form>
+          <md-toolbar>
+            <div class="md-toolbar-tools">
+              <h2>Invite New Member</h2>
+              <span flex></span>
+              <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+              </md-button>
+            </div>
+          </md-toolbar>
+
+          <md-dialog-content>
+            <div class="md-dialog-content">
+              <md-content class="container form-group">
+                <md-input-container md-no-float="" class="">
+                  <md-icon ><i class="material-icons">group_add</i></md-icon>
+                  <input ng-model="user.name" type="text" placeholder="#group name" ng-required="true">
+                </md-input-container>
+                <br>
+                <br>
+                <md-input-container class="" md-no-float=""  class="form-control">
+                  <md-icon ><i class="material-icons">mail</i></md-icon>
+                  <input ng-model="memberName" type="text" placeholder="Invite" ng-required="true" list="members">
+                  <datalist id="members">
+                    <option ng-repeat="member in project.memberList" value="{{member.fullName}}"/>
+                  </datalist>
+                </md-input-container>
+                <br>
+                <md-button class="btn btn-raised" ng-click="createChannel()">Create</md-button>
+                <md-button class="btn btn-raised" ng-click="cancel()">Cancel</md-button>
+              </md-content>
+            </div>
+          </md-dialog-content>
+        </form>
+      </md-dialog>
+    </script>
+
+
+
+  </div>
+  <script>
+  var objDiv=document.getElementById("bottom");
+  objDiv.scrollTop=objDiv.scrollHeight;
+  </script>
+</div>

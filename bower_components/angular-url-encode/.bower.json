@@ -1,0 +1,43 @@
+{
+  "name": "angular-url-encode",
+  "homepage": "https://github.com/benjamincharity/angular-url-encode",
+  "authors": [
+    "Benjamin Charity <ben@benjamincharity.com>"
+  ],
+  "description": "A simple Angular filter to URL-encode a string.",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "angular",
+    "filter",
+    "url-encode",
+    "url-encoding",
+    "url",
+    "encode",
+    "encoding"
+  ],
+  "license": "MIT",
+  "main": "dist/angular-url-encode.js",
+  "dependencies": {
+    "angular": "~1.4.0"
+  },
+  "ignore": [
+    "**/.*",
+    "src",
+    "node_modules",
+    "package.json",
+    "webpack.config.js"
+  ],
+  "version": "0.1.1",
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.1",
+    "commit": "610f8b3dc046a9fbdbbe6220e7a87cf82cf4df97"
+  },
+  "_source": "https://github.com/benjamincharity/angular-url-encode.git",
+  "_target": "^0.1.1",
+  "_originalSource": "angular-url-encode"
+}

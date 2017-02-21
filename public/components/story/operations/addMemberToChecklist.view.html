@@ -1,0 +1,39 @@
+<div class="modal-header">
+
+    <button type="button" class="close" ng-click="cancel()"><i class="fa fa-times-circle"></i></button>
+  <h3 class="modal-title">Task : {{title}}</h3>
+
+</div>
+<div class="modal-body" ng-init="initLoadMembersOfStory()">
+  <div class="form-group">
+    <input type="text" ng-model="memberName" name="memberSearch" placeholder="Search Member" class="form-control" autofocus>
+    <div id="modal-members">
+      <ul class="modal-members-list">
+        <li ng-click="addRemoveMembersList(membersArray)" ng-hide="!memberName" ng-repeat="membersArray in storyMember |filter: memberName" class="list-group-item">
+          <div class="avatar-wrapper" ng-show="membersArray.photo == undefined">
+            <ng-letter-avatar data={{membersArray.fullName}} charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+          </div>{{membersArray.fullName}}
+          <i class="fa fa-check pull-right" ng-show = "assignedMemberIndex.indexOf(membersArray._id)!=-1"></i>
+         </li>
+      </ul>
+    </div>
+  </div>
+  <h3 ng-show="assignedMember.length==0">No members are assigned <br> <hr></h3>
+  <h3 ng-show="assignedMember.length>0">assigned Memebers<br> <hr></h3>
+</div>
+<div class="modal-body">
+<div id="modal-members">
+  <ul class="modal-members-list">
+        <li class="list-group-item" ng-repeat="member in assignedMember">{{member.firstName +" "+ member.lastName}}
+          <i class="fa fa-remove pull-right" ng-click="addRemoveMembersList(member)"></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="cancel()">Done</button>
+</div>
+<!-- </script> -->
+
+
+<!-- new work -->

@@ -1,0 +1,77 @@
+{
+  "_id": {
+    "$oid": "57026055772a712a164d70bb"
+  },
+  "name": "Project 1",
+  "memberList": [{
+    "$oid": "570395a239dc5fbac028505b"
+  }],
+  "release": [{
+    "name": "New Release",
+    "description": "Desc",
+    "creationDate": {
+      "$date": "2016-04-04T12:43:07.736Z"
+    },
+    "releaseDate": {
+      "$date": "2016-04-30T00:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "5702615b772a712a164d70c1"
+    },
+    "sprints": [{
+      "$oid": "57026bfd140731cc1810b5c0"
+    }, {
+      "$oid": "57026b2f140731cc1810b5ba"
+    }]
+  }, {
+    "name": "Another Release",
+    "description": "This is my new release with a long description so that it will over flow",
+    "creationDate": {
+      "$date": "2016-04-04T18:27:42.865Z"
+    },
+    "releaseDate": {
+      "$date": "2016-04-15T00:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "5702b21e24dc0eed189ea054"
+    },
+    "sprints": []
+  }, {
+    "name": "Some More releases",
+    "description": "blah blah blah",
+    "creationDate": {
+      "$date": "2016-04-04T19:38:18.041Z"
+    },
+    "releaseDate": {
+      "$date": "2016-04-16T00:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "5702c2aa24dc0eed189ea055"
+    },
+    "sprints": []
+  }]
+}
+
+{
+  "_id": {
+    "$oid": "57026064772a712a164d70bd"
+  },
+  "name": "Project 2",
+  "memberList": [{
+    "$oid": "570395a239dc5fbac028505b"
+  }],
+  "release": [{
+    "name": "Release 1",
+    "description": "Blah blah blah",
+    "creationDate": {
+      "$date": "2016-04-04T13:30:02.629Z"
+    },
+    "releaseDate": {
+      "$date": "2016-04-28T00:00:00.000Z"
+    },
+    "_id": {
+      "$oid": "57026c5a24dc0eed189ea053"
+    },
+    "sprints": []
+  }]
+}

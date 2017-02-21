@@ -1,0 +1,34 @@
+{
+  "name": "chatservice",
+  "version": "1.0.0",
+  "description": "Chat Service",
+  "main": "chatservice.js",
+  "scripts": {
+    "start": "node chatservice.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stackroute/quizart-social.git"
+  },
+  "keywords": [
+    "Chat",
+    "Service",
+    "Redis",
+    "Save",
+    "History",
+    "Retrieve",
+    "History",
+    "Generate",
+    "UUID"
+  ],
+  "author": "Vigneshwar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stackroute/quizart-social/issues"
+  },
+  "homepage": "https://github.com/stackroute/quizart-social#readme",
+  "dependencies": {
+    "redis": "^2.6.2"
+  }
+}

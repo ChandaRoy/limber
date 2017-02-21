@@ -1,0 +1,275 @@
+
+<!-- <button class="btn btn-success pull-right" ng-click="openReleaseChart()">
+
+Release Chart
+</button>
+<button class="btn btn-success pull-right" ng-click="showOverGraph()">
+Over View
+</button> -->
+<!-- Start Modal Window-->
+<!-- End Modal-->
+
+
+<div class = "projectPage container" >
+  <div class="showNewProject" ng-show = "projects.length == 0" >
+    <center>Awesome... You are good to go</center>
+  </div>
+  <div class="btn btn-success addProject" ng-click = "setDefaultForProject(project._id)" data-toggle="modal" data-target="#myModal">
+    <i class="fa fa-plus"></i>  Add New Project
+  </div>
+
+  <div class="pageHeading">
+    <b>Project</b>
+    <span>
+      <b class="fa fa-table" ng-click="openReleaseChart()"></b>
+      <b class="fa fa-sun-o" ng-click="showOverGraph()"></b>
+    </span>
+  </div>
+  <div ng-repeat="project in projects" class="main">
+    <div id="{{project._id}}" class = "container">
+      <h4>{{project.name}}
+        <i class="fa fa-pencil" ng-click = "editProjectShow=true; newProjectName=project.name; newProjectDetails=project.description"></i>
+        <i class="fa fa-user-plus" data-toggle="modal" data-target="#addMembersModal"  ng-click="getAllUsers(project._id,project.name,project.githubStatus)" aria-hidden="true"></i>
+
+       <!-- TODO !!IMPORTANT!!  this dropbox should be connected to one of the member asigned to projects. Then store the data in DB. Then this button should be removed. Now it's not doing anything. It will just give the access token( Check out project.controller.js). Save the token in DB. And use the token to upload all attachments into single dropdox. -->
+
+        <a ng-click="linkDropbox(project._id)"><i class="fa fa-dropbox"></i></a>
+
+        <i class="fa fa-github" ng-click="getRepo(project._id)" ng-hide="githubProfile.id == undefined || githubProfile == undefined || project.githubStatus == true" tooltip-placement="bottom"  uib-tooltip="View Github Issues"></i>
+        <i class="fa fa-github"  ng-show="githubProfile.id == undefined &&  project.githubStatus == true" style="color:red" tooltip-placement="top"  uib-tooltip="Please integrate your account with github"></i>
+
+
+
+
+        <i class="fa fa-cloud-download"   ng-click="getIssues(project._id)" ng-show="project.githubStatus == true && githubProfile.id" tooltip-placement="bottom"  uib-tooltip="Pull open Git Issues"></i>
+        <i class="fa fa-refresh fa-spin fa-3x fa-fw"  style="padding-left:0" ng-show="project.githubStatus!=true && syncValue(project._id)" ></i>
+        <!-- <i class="fa fa-exclamation"  ng-click="pushStories(project._id);pushMember()" ng-show="project.githubStatus == true"></i> -->
+      </h4>
+
+      <small tooltip-placement="bottom"  uib-tooltip="{{project.description}}" >{{project.description | limitTo:longPrjDescLimit }}<span ng-hide="project.description.length < longPrjDescLimit || project.description.length==undefined">
+        ...
+      </span></small><br>
+
+      <div class="backgroundBlack" ng-class="{'showEdit':editProjectShow,'hideEdit':!editProjectShow}" ng-click = "editProjectShow=false">
+
+      </div>
+      <form class="editRelease editProject" ng-class="{'showEdit':editProjectShow,'hideEdit':!editProjectShow}">
+        <div class="form-group frm">
+          <label class="col-sm-3" for="projectName">Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputName" ng-model = "newProjectName">
+          </div>
+        </div>
+        <div class="form-group frm">
+          <label class="col-sm-3" for="projectDesc">Description</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" id="inputDesc" ng-model = "newProjectDetails"/>
+          </div>
+        </div>
+        <button type="button" class="btn btn-success" ng-click="editProject(newProjectName,newProjectDetails, project._id)?editProjectShow=false:editProjectShow=true"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+        <!-- <button type="button" ng-click = "showEdit=false">X</button> -->
+      </form>
+      <div class="boxContainer" ng-repeat= "release in project.release" >
+        <div class="box" id="{{release._id}}" ng-class="{'showSlide':hovering,'hideSlide':!hovering} "   ng-mouseenter="hovering=true" ng-mouseleave="hovering=false" ng-click="setProject(project._id,project.name, release._id,release.name,release.description)">
+          <div class="slideMenuBox">
+            <i class="fa fa-trash" uib-tooltip="Delete" data-toggle="modal" data-target="#deleteReleae" ng-click = "setReleaseToDelete(project._id, release._id,project.name,release.name)"></i>
+            <i class="fa fa-pencil" uib-tooltip="Edit" ng-click = "showEdit=true; newReleaseName= release.name; newReleaseDetails = release.description; newReleaseDate=release.releaseDate"></i>
+            <i class="fa fa-star" uib-tooltip="Favorite" ng-click = "starFun(release._id)"></i>
+          </div>
+          <div class="boxHeading">
+            {{release.name}}
+          </div>
+          <div class="desc">
+            {{release.description | limitTo:longDescLimit }}<span ng-hide="release.description.length < longDescLimit || release.description ==undefined">
+              ...
+            </span>&nbsp;
+          </div>
+          <div class="date">
+            Release Date: {{release.releaseDate | date:'dd-MMM-yyyy'}}
+          </div>
+          <!-- <div class="dummy" ui-sref="sprint({ prId : '57026055772a712a164d70bb', sprintID: '57026bfd140731cc1810b5c0'})"> -->
+          <div class="dummy" ui-sref="release({ prId : project._id, releaseID: release._id})">
+          </div>
+
+          <div class="backgroundBlack" ng-class="{'showEdit':showEdit,'hideEdit':!showEdit}" ng-click = "showEdit=false">
+
+          </div>
+          <form class="editRelease" ng-class="{'showEdit':showEdit,'hideEdit':!showEdit}">
+            <div class="form-group frm">
+              <label class="col-sm-4" for="releaseName">Name</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputName" ng-model = "newReleaseName">
+              </div>
+            </div>
+            <div class="form-group frm">
+              <label class="col-sm-4" for="releaseDesc">Name</label>
+              <div class="col-sm-8">
+                <textarea class="form-control" id="inputDesc" ng-model = "newReleaseDetails"/>
+              </div>
+            </div>
+            <div class="form-group frm">
+              <label class="col-sm-4" for="releaseDate">Release Date</label>
+              <div class="col-sm-8">
+                <input type="date" class="form-control" id="inputDate" value = "{{release.releaseDate | date:'yyyy-MM-dd'}}" ng-model = "newReleaseDate" >
+              </div>
+            </div>
+            <button type="button" class="btn btn-success" ng-click="editRelease(newReleaseName,newReleaseDetails,newReleaseDate,release.creationDate,project._id,release._id,release.name)? showEdit=false : showEdit=true"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+            <!-- <button type="button" ng-click = "showEdit=false">X</button> -->
+          </form>
+        </div>
+      </div>
+      <div class="box addMore" ng-click = "setDefaultForRelease(project._id)" data-toggle="modal" data-target="#myModal">
+        Add Release...
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <div class="pageHeading" ng-click="showGraph=!showGraph">
+    <span tooltip-placement="bottom"  uib-tooltip="Analytics">...</span>
+    <div class="graphMenu" ng-show="showGraph">
+      <icon class="graphIconOne" ng-click="openReleaseChart()">
+        <b class="fa fa-list-alt"></b>
+      </icon>
+      <icon class="graphIconTwo" ng-click="showOverGraph()">
+        <b class="fa fa-dot-circle-o"></b>
+      </icon>
+
+    </div>
+  </div>
+</div>
+
+<!-- FIXME: Make a directive for this modal to avoid duplication -->
+<div class="modal fade" id="addMembersModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Members</h4>
+      </div>
+      <div class="modal-body">
+        <div class="clearfix avatars-wrap">
+          <div class="menu-bar-avatar" ng-repeat="member in projMemberList" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+            <div>
+              <img ng-src={{member.photo}} class="pic-avatar" ng-hide="member.photo == undefined" />
+              <div class="avatar-ng" ng-show="member.photo == undefined">
+                <ng-letter-avatar data="{{member.fullName}}" charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+              </div>
+              &nbsp;
+            </div>
+          </div>
+        </div>
+        <div>
+          <form>
+            <autocomplete ng-model="addedUserEmail" data="dbUsers" attr-placeholder="Enter user email..."></autocomplete>
+          </form>
+
+          <!-- <input class="txt-add-members" id="txtAddMember" name="txtAddMember" type="text" placeholder="e.g. you@fragile.com" ng-model="members" required> -->
+
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button class="btn btn-success" ng-click="addMember()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Delete Release Modal -->
+<div class="modal fade AlertBox" id="deleteReleae" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header WarningModal">
+        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+        <h4 class="modal-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Warning</h4>
+      </div>
+      <div class="modal-body">
+        Do you want to delete the Release?<br><br>
+        <b>Release Name: </b>{{toDeleteReleaseName}}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click = "archiveFun()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal fade" id="linkProjectToRepo" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Link Project to Github Repo</h4>
+</div>
+<div class="modal-body">
+
+
+
+<div ng-repeat="repo in repos">
+<label>
+<input type="radio" name="selectedRepo" ng-model="$parent.selectedRepo" value="{{repo}}">
+Name:{{repo.name}} | Owner:{{repo.owner}}
+
+</label><br/>
+
+</div>
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+<button type="button" class="btn btn-success" ui-sref="issues({repo:selectedRepo})">Link</button>
+
+</div>
+
+
+
+</div>
+</div>
+</div> -->
+
+
+<!--Link Github Repository to project -->
+<!-- <div class="modal fade" id="linkProjectToRepo" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Sync project with Github</h4>
+</div>
+<div class="modal-body">
+<div class="clearfix avatars-wrap">
+<div class="menu-bar-avatar" ng-repeat="member in projMemberList" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+<div>
+<img ng-src={{member.photo}} class="pic-avatar" ng-hide="member.photo == undefined" />
+<div class="avatar-ng" ng-show="member.photo == undefined">
+<ng-letter-avatar data="{{member.fullName}}" charCount=2 shape="round" height="30px" width="30px" fontSize="25px"></ng-letter-avatar>
+</div>
+&nbsp;
+</div>
+</div>
+</div>
+<div>
+<form>
+<autocomplete ng-model="addedUserEmail" data="dbUsers" attr-placeholder="Enter user email..."></autocomplete>
+</form>
+
+<input class="txt-add-members" id="txtAddMember" name="txtAddMember" type="text" placeholder="e.g. you@fragile.com" ng-model="members" required>
+
+</div>
+
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+<button class="btn btn-success" ng-click="addMember()">Add</button>
+</div>
+</div>
+</div>
+</div> -->
